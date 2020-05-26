@@ -48,7 +48,6 @@ if (config.env === 'development') {
     msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
     colorStatus: true // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
   }));
-
 }
 
 // mount all routes on /api path
