@@ -7,7 +7,7 @@
    },
    "servers": [
       {
-         "url": "http://localhost:4040/api/",
+         "url": "http://localhost:7000/api/",
          "description": "SwaggerHub API Auto Mocking"
       }
    ],
@@ -44,7 +44,7 @@
       "/auth/login": {
          "post": {
             "summary": "login",
-            "tags": [ "Auth" ], 
+            "tags": [ "Auth" ],
             "requestBody": {
                "content": {
                   "application/json": {
@@ -120,7 +120,7 @@
          }
       }
    },
-   "components": { 
+   "components": {
       "schemas":{
          "Login":{
             "type": "object",
