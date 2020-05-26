@@ -1,0 +1,17 @@
+version: "3"
+services:
+  api.dev:
+    container_name: api.dev
+    restart: always
+    build:
+      context: .
+      dockerfile: ./docker/dev/Dockerfile
+    ports:
+      - "7000:7000"
+    environment:
+      - NODE_ENV=development
+      - PORT=7000
+    volumes:
+      - .:/usr/src/app
+      - /usr/app/node_modules
+
