@@ -11,6 +11,17 @@ const router = express.Router(); // eslint-disable-line new-cap
 router.route('/login')
   .post(validate(paramValidation.login), authCtrl.login);
 
+router.route('/register')
+  .post(validate(paramValidation.register), authCtrl.register);
+
+router.route('/verify')
+  .post(validate(paramValidation.verify), authCtrl.verify);
+
+router.route('/otp')
+  .post(validate(paramValidation.otp), authCtrl.otp);
+
+router.route('/password')
+  .post(validate(paramValidation.password), authCtrl.password);
 /** GET /api/auth/random-number - Protected route,
  * needs token returned by the above as header. Authorization: Bearer {token} */
 router.route('/random-number')

@@ -26,5 +26,33 @@ module.exports = {
       username: Joi.string().required(),
       password: Joi.string().required()
     }
-  }
+  },
+  // POST /api/auth/login
+  register: {
+    body: {
+      username: Joi.string().required(),
+      password: Joi.string().required()
+    }
+  },
+  // POST /api/auth/verify
+  verify: {
+    body: {
+      username: Joi.string().required(),
+      password: Joi.string().required()
+    }
+  },
+  // POST /api/auth/otp
+  otp: {
+    body: {
+      username: Joi.string().required(),
+      password: Joi.string().required()
+    }
+  },
+  // POST /api/auth/verify
+  password: {
+    body: {
+      username: Joi.string().required(),
+      password: Joi.string().required()
+    }
+  },
 };
