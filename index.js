@@ -9,8 +9,7 @@ const debug = require('debug')('myapp:index');
 // make bluebird default Promise
 Promise = require('bluebird'); // eslint-disable-line no-global-assign
 mongoose.Promise = Promise;
-const mongoUri = 'mongodb://192.18.2.69/auth';// config.mongo.host;
-console.log('db', mongoUri);
+const mongoUri = 'mongodb://auctiondbdev/auth';// config.mongo.host;
 mongoose.connect(mongoUri, { useUnifiedTopology: true, useNewUrlParser: true });
 mongoose.connection.on('error', () => {
   throw new Error(`unable to connect to database: ${mongoUri}`);

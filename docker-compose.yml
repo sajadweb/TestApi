@@ -1,7 +1,11 @@
 version: "3"
+networks:
+  auctiondev:
+    driver: bridge
 services:
-  api.dev:
-    container_name: api.dev
+  # Node code
+  auctiondev:
+    container_name: auctiondev
     restart: always
     build:
       context: .
@@ -14,4 +18,33 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/app/node_modules
-
+    depends_on:
+      - nginxdev
+      - auctiondbdev
+    links:
+      - nginxdev
+      - auctiondbdev
+    networks:
+      - auctiondev
+  # Nginx
+  nginxdev:
+    image: nginx:alpine
+    container_name: nginxdev
+    restart: always
+    ports:
+      - "88:80"
+    volumes:
+      - .:/usr/src/app
+      - /usr/app/node_modules
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - auctiondev
+  # MongoDb
+  auctiondbdev:
+    container_name: auctiondbdev
+    image: mongo
+    ports:
+      - "27017:27017"
+    restart: always
+    networks:
+      - auctiondev
