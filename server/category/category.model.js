@@ -1,15 +1,29 @@
 const Promise = require('bluebird');
-const mongoose = require('mongoose');
-const httpStatus = require('http-status');
 const APIError = require('../helpers/APIError');
-
+const httpStatus = require('http-status');
+// eslint-disable-next-line import/newline-after-import
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 /**
  * Category Schema
  */
+
 const CategorySchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+    index: { unique: true }
+  },
+  icon: {
+    type: String,
+  },
+  parentId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Category'
+  },
   updatedAt: {
     type: Date,
-    default: null
+    default: Date.now
   },
   createdAt: {
     type: Date,
@@ -23,7 +37,9 @@ const CategorySchema = new mongoose.Schema({
  * - validations
  * - virtuals
  */
-
+// CategorySchema.pre('save', function (next) {
+//   next();
+// });
 /**
  * Methods
  */
@@ -36,7 +52,7 @@ CategorySchema.statics = {
   /**
    * Get user
    * @param {ObjectId} id - The objectId of user.
-   * @returns {Promise<User, APIError>}
+   * @returns {Promise<Category, APIError>}
    */
   get(id) {
     return this.findById(id)
@@ -45,7 +61,7 @@ CategorySchema.statics = {
         if (res) {
           return res;
         }
-        const err = new APIError('No such user exists!', httpStatus.NOT_FOUND);
+        const err = new APIError('No such category exists!', httpStatus.NOT_FOUND);
         return Promise.reject(err);
       });
   },
@@ -58,6 +74,7 @@ CategorySchema.statics = {
    */
   list({ skip = 0, limit = 50 } = {}) {
     return this.find()
+      .populate({ path: 'parentId', select: 'title' })
       .sort({ createdAt: -1 })
       .skip(+skip)
       .limit(+limit)

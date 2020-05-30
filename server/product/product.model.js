@@ -7,6 +7,13 @@ const APIError = require('../helpers/APIError');
  * Product Schema
  */
 const ProductSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  file: {
+    type: mongoose.Schema.Array,
+  },
   updatedAt: {
     type: Date,
     default: null

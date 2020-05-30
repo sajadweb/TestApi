@@ -16,6 +16,41 @@ const UserSchema = new mongoose.Schema({
     required: true,
     match: [/^09[0-9]{9}$/, 'The value of path {PATH} ({VALUE}) is not a valid mobile number.']
   },
+  planes: [
+    {
+      planId: {
+        type: mongoose.Schema.Types.ObjectId,
+        refPath: 'Plan'
+      },
+      expiredAt: {
+        type: Date,
+        default: null
+      },
+    }
+  ],
+  otp: {
+    code: {
+      type: String
+    },
+    expiredAt: {
+      type: Date,
+      default: null
+    },
+  },
+  role: {
+    type: String,
+    enum: ['admin', 'user']
+  },
+  password: {
+    type: String
+  },
+  oldPassword: {
+    type: String
+  },
+  updateAt: {
+    type: Date,
+    default: Date.now
+  },
   createdAt: {
     type: Date,
     default: Date.now
@@ -32,8 +67,7 @@ const UserSchema = new mongoose.Schema({
 /**
  * Methods
  */
-UserSchema.method({
-});
+UserSchema.method({});
 
 /**
  * Statics

@@ -1,6 +1,6 @@
 const express = require('express');
 const validate = require('express-validation');
-const paramValidation = require('../../config/param-validation');
+const paramValidation = require('./category.validation');
 const categoryCtrl = require('./category.controller');
 
 const router = express.Router(); // eslint-disable-line new-cap
@@ -10,14 +10,14 @@ router.route('/')
   .get(categoryCtrl.list)
 
   /** POST /api/category - Create new category */
-  .post(validate(paramValidation.createUser), categoryCtrl.create);
+  .post(validate(paramValidation.create), categoryCtrl.create);
 
 router.route('/:id')
   /** GET /api/category/:id - Get category */
   .get(categoryCtrl.get)
 
   /** PUT /api/category/:id - Update category */
-  .put(validate(paramValidation.updateUser), categoryCtrl.update)
+  .put(validate(paramValidation.update), categoryCtrl.update)
 
   /** DELETE /api/category/:id - Delete category */
   .delete(categoryCtrl.remove);

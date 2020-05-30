@@ -7,9 +7,29 @@ const APIError = require('../helpers/APIError');
  * Plan Schema
  */
 const PlanSchema = new mongoose.Schema({
+  title: { type: String },
+  duration: { type: String, required: true}, // validity duration
+  prices: [{
+    id: {
+      type: mongoose.Schema.Types.ObjectID,
+      required: true,
+    },
+    amount: {
+      type: mongoose.Schema.Types.Number,
+      required: true,
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now
+    }
+  }],
   updatedAt: {
     type: Date,
-    default: null
+    default: Date.now
   },
   createdAt: {
     type: Date,

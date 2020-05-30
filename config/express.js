@@ -14,7 +14,9 @@ const routes = require('../index.route');
 const config = require('./config');
 const APIError = require('../server/helpers/APIError');
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('../swagger/swagger.json');
+const YAML = require('yamljs');
+
+const swaggerDocument = YAML.load(__dirname +'/../swagger/swagger.yaml');
 
 const app = express();
 

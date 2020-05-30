@@ -4,9 +4,16 @@ const httpStatus = require('http-status');
 const APIError = require('../helpers/APIError');
 
 /**
- * Rule Schema
+ * Setting Schema
  */
-const RuleSchema = new mongoose.Schema({
+const SettingSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    enum: ['about', 'rule', 'contact']
+  },
+  content: {
+    type: String
+  },
   updatedAt: {
     type: Date,
     default: null
@@ -23,23 +30,28 @@ const RuleSchema = new mongoose.Schema({
  * - validations
  * - virtuals
  */
-
+// SettingSchema.pre('find', function (next) {
+//   // if (this.type === 'rule') {
+//     this.content =  "hi";
+//   // }
+//   next(this);
+// });
 /**
  * Methods
  */
-RuleSchema.method({});
+SettingSchema.method({});
 
 /**
  * Statics
  */
-RuleSchema.statics = {
+SettingSchema.statics = {
   /**
    * Get user
    * @param {ObjectId} id - The objectId of user.
    * @returns {Promise<User, APIError>}
    */
-  get(id) {
-    return this.findById(id)
+  get(type) {
+    return this.findOne({ type })
       .exec()
       .then((res) => {
         if (res) {
@@ -66,6 +78,6 @@ RuleSchema.statics = {
 };
 
 /**
- * @typedef Rule
+ * @typedef Setting
  */
-module.exports = mongoose.model('Rule', RuleSchema);
+module.exports = mongoose.model('Setting', SettingSchema);
