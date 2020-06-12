@@ -1,5 +1,5 @@
 {
-  "name": "myapp",
+  "name": "auction",
   "version": "1.0.0",
   "description": "test api",
   "author": "Sajjad Mohammadi nejad",
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "async": "^3.2.0",
+    "bcrypt": "^5.0.0",
     "bluebird": "3.5.1",
     "body-parser": "1.18.2",
     "compression": "1.7.2",
@@ -41,8 +42,10 @@
     "http-status": "1.0.1",
     "joi": "10.6.0",
     "jsonwebtoken": "7.1.9",
+    "kavenegar": "^1.1.4",
     "lodash": "^4.17.15",
     "method-override": "^2.3.10",
+    "moment": "^2.26.0",
     "mongoose": "5.7.5",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",

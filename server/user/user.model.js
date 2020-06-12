@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  mobileNumber: {
+  mobile: {
     type: String,
     required: true,
     match: [/^09[0-9]{9}$/, 'The value of path {PATH} ({VALUE}) is not a valid mobile number.']
@@ -89,7 +89,15 @@ UserSchema.statics = {
         return Promise.reject(err);
       });
   },
-
+  /**
+   * Get user
+   * @param {ObjectId} id - The objectId of user.
+   * @returns {Promise<User, APIError>}
+   */
+  whereFirst(operations) {
+    return this.findOne(operations)
+      .exec();
+  },
   /**
    * List users in descending order of 'createdAt' timestamp.
    * @param {number} skip - Number of users to be skipped.

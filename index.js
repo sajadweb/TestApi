@@ -7,9 +7,10 @@ const config = require('./config/config');
 const app = require('./config/express');
 const debug = require('debug')('myapp:index');
 // make bluebird default Promise
+// eslint-disable-next-line import/newline-after-import
 Promise = require('bluebird'); // eslint-disable-line no-global-assign
 mongoose.Promise = Promise;
-const mongoUri = 'mongodb://auctiondbdev/auth';// config.mongo.host;
+const mongoUri = config.mongo.host;
 mongoose.connect(mongoUri, { useUnifiedTopology: true, useNewUrlParser: true });
 mongoose.connection.on('error', () => {
   throw new Error(`unable to connect to database: ${mongoUri}`);
